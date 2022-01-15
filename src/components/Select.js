@@ -10,6 +10,7 @@ function BasicSelect(props) {
 
   const handleChange = (event) => {
     setAge(event.target.value);
+    props.onChange(event.target.value);
   };
 
   return (

@@ -1,18 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
+
+import BuyOrder from './pages/BuyOrder';
+import SellOrder from './pages/SellOrder';
+
 import theme from './theme';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/buy-order" element={<BuyOrder />} />
+          <Route path="/sell-order" element={<SellOrder />} />
+        </Routes>
+      </BrowserRouter>
+
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
