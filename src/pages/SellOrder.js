@@ -5,7 +5,7 @@ import TabPanel from '../components/TabPanel';
 import useBinance from '../hooks/useBinance';
 import OrderLayout from '../layouts/OrderLayout';
 
-function App(props) {
+function App() {
   const { bids } = useBinance('buy');
 
   return (

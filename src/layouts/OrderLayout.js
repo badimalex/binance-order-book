@@ -9,13 +9,13 @@ const DEPTH = {
   15: 15,
   30: 30,
   50: 50,
-  100: 100,
+  100: 100
 };
 
 const GROUP = {
   0: 0,
   1: 1,
-  2: 2,
+  2: 2
 };
 
 function App(props) {
@@ -38,10 +38,10 @@ function App(props) {
             style={{ marginRight: '12px' }}
             title="Depth"
             defaultValue={depth}
-            onChange={(depth) => {
+            onChange={depth => {
               const uriObj = {
                 group,
-                depth,
+                depth
               };
               const qs = new URLSearchParams(uriObj);
               navigate({ search: `?${qs.toString()}` });
@@ -50,24 +50,24 @@ function App(props) {
               { value: 15, label: 15 },
               { value: 30, label: 30 },
               { value: 50, label: 50 },
-              { value: 100, label: 100 },
+              { value: 100, label: 100 }
             ]}
           />
           <Select
             title="Group"
             defaultValue={group}
-            onChange={(depth) => {
+            onChange={depth => {
               const uriObj = {
                 group,
-                depth,
+                depth
               };
               const qs = new URLSearchParams(uriObj);
               navigate({ search: `?${qs.toString()}` });
             }}
             items={[
-              { value: 0, label: `0 decimals` },
-              { value: 1, label: `1 decimals` },
-              { value: 2, label: `2 decimals` },
+              { value: 0, label: '0 decimals' },
+              { value: 1, label: '1 decimals' },
+              { value: 2, label: '2 decimals' }
             ]}
           />
         </div>
@@ -76,11 +76,7 @@ function App(props) {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={props.activeTab}>
           <Tab label="Buy Order" component={Link} to={`/buy-order${search}`} />
-          <Tab
-            label="Sell Order"
-            component={Link}
-            to={`/sell-order${search}`}
-          />
+          <Tab label="Sell Order" component={Link} to={`/sell-order${search}`} />
         </Tabs>
       </Box>
       {props.children}
