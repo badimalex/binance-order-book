@@ -5,9 +5,18 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useLocation } from 'react-router-dom';
+import { GROUP, DEPTH } from '../layouts/OrderLayout';
+
 import React from 'react';
 
 function BasicTable({ rows }) {
+  const { search } = useLocation();
+
+  const query = new URLSearchParams(search);
+  const group = GROUP[query.get('group')] || 2;
+  const depth = DEPTH[query.get('depth')] || 15;
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
@@ -19,13 +28,20 @@ function BasicTable({ rows }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((item, i) => (
-            <TableRow key={i}>
-              <TableCell>{item.title}</TableCell>
-              <TableCell>{item.price}</TableCell>
-              <TableCell>{item.amount}</TableCell>
-            </TableRow>
-          ))}
+          {rows.slice(0, depth).map((item, i) => {
+            const price = new Intl.NumberFormat('en-US', {
+              minimumFractionDigits: group,
+              maximumFractionDigits: group
+            }).format(item.price);
+
+            return (
+              <TableRow key={i}>
+                <TableCell>{item.title}</TableCell>
+                <TableCell>{price}</TableCell>
+                <TableCell>{item.amount}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>

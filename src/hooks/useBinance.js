@@ -1,10 +1,11 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const bidReducer = (acc, val, index) => {
   acc.push({
     title: `Buy ${index + 1}`,
-    price: val[0],
-    amount: val[1]
+    price: val.price || val[0],
+    amount: val.amount || val[1]
   });
   return acc;
 };
@@ -16,6 +17,7 @@ const API_KEYS = {
 
 const useBinance = apiKey => {
   const [bids, setBids] = React.useState([]);
+  const { search } = useLocation();
 
   React.useEffect(() => {
     const ws = new WebSocket('wss://stream.binance.com/stream?streams=btcusdt@depth');
@@ -23,7 +25,9 @@ const useBinance = apiKey => {
     ws.onmessage = function(event) {
       const json = JSON.parse(event.data);
       try {
-        setBids(json.data[API_KEYS[apiKey]].slice(0, 5).reduce(bidReducer, []));
+        const items = json.data[API_KEYS[apiKey]];
+
+        setBids(prevState => [...items, ...prevState].slice(0, 100).reduce(bidReducer, []));
       } catch (err) {
         // console.log(err);
       }
@@ -32,7 +36,7 @@ const useBinance = apiKey => {
     return () => {
       ws.close();
     };
-  }, [apiKey]);
+  }, [apiKey, search]);
 
   return {
     bids

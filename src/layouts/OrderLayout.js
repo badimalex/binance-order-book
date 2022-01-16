@@ -5,17 +5,17 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Select from '../components/Select';
 
-const DEPTH = {
+export const DEPTH = {
   15: 15,
   30: 30,
   50: 50,
   100: 100
 };
 
-const GROUP = {
-  0: 0,
-  1: 1,
-  2: 2
+export const GROUP = {
+  0: '0',
+  1: '1',
+  2: '2'
 };
 
 function App(props) {
@@ -56,7 +56,7 @@ function App(props) {
           <Select
             title="Group"
             defaultValue={group}
-            onChange={depth => {
+            onChange={group => {
               const uriObj = {
                 group,
                 depth
