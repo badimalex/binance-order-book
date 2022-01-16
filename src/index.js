@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
@@ -21,6 +21,10 @@ ReactDOM.render(
         <Routes>
           <Route path="/buy-order" element={<BuyOrder />} />
           <Route path="/sell-order" element={<SellOrder />} />
+          <Route
+            path="/"
+            element={<Navigate to="/buy-order" />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -1,9 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-const bidReducer = (acc, val, index) => {
+const bidReducer = (acc, val) => {
   acc.push({
-    title: `Buy ${index + 1}`,
     price: val.price || val[0],
     amount: val.amount || val[1]
   });

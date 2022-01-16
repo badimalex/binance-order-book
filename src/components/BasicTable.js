@@ -10,7 +10,7 @@ import { GROUP, DEPTH } from '../layouts/OrderLayout';
 
 import React from 'react';
 
-function BasicTable({ rows }) {
+function BasicTable({ rows, title }) {
   const { search } = useLocation();
 
   const query = new URLSearchParams(search);
@@ -28,15 +28,15 @@ function BasicTable({ rows }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.slice(0, depth).map((item, i) => {
+          {rows.slice(0, depth).map((item, index) => {
             const price = new Intl.NumberFormat('en-US', {
               minimumFractionDigits: group,
               maximumFractionDigits: group
             }).format(item.price);
 
             return (
-              <TableRow key={i}>
-                <TableCell>{item.title}</TableCell>
+              <TableRow key={index}>
+                <TableCell>{title} {index + 1}</TableCell>
                 <TableCell>{price}</TableCell>
                 <TableCell>{item.amount}</TableCell>
               </TableRow>

@@ -11,7 +11,11 @@ function App() {
   return (
     <OrderLayout activeTab={0}>
       <TabPanel value={0} index={0}>
-        {bids.length > 0 ? <BasicTable rows={bids} /> : <CircularProgress />}
+        {bids.length > 0 ? (
+          <BasicTable title="Buy" rows={bids} />
+        ) : (
+          <CircularProgress />
+        )}
       </TabPanel>
     </OrderLayout>
   );
